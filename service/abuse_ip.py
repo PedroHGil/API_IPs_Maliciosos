@@ -1,27 +1,35 @@
 import requests
 import json
+from utils import credenciais
+from utils import urls
 
-def get_abuse(abuse):   
-    url = 'https://api.abuseipdb.com/api/v2/check'
+class AbuseIP_API:
     
-    headers = {
-         'Accept': 'application/json',
-         'Key': '56121366dc68a581f3d33cea839bb12dbf17ab3f9d9a3d931d7e0a5077d8e7b3fe70bf9128113e19'
-     }
-    querystring = {
-     'ipAddress': abuse.ip,
-     'maxAgeInDays': '90'
-     }
-    response = json.loads(requests.get(url=url, headers=headers, params=querystring).text)
-    return {"malicioso": response['data']['abuseConfidenceScore'],
-            "ip": response['data']['ipAddress'],
-            "Dominio": response['data']['domain'],
-            "País": response['data']['countryCode'],
-            "Tipo": response['data']['usageType']
-            }
+    def get_report(body):   
+        
+        api_url = urls
+        api_key = credenciais
+        
+        url = api_url.URL.URL_ABUSE_IP
 
-#response = requests.request(method='GET', url=url, headers=headers, params=querystring)
-
-# Formatted output
-#decodedResponse = json.loads(response.text)
-#print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+        headers = {
+             'Accept': 'application/json',
+             'Key': api_key.Credenciais.API_1
+         }
+        
+        querystring = {
+         'ipAddress': body,
+         'maxAgeInDays': '90'
+         }
+        
+        response = json.loads(requests.get(url=url, headers=headers, params=querystring).text)
+        
+        return {
+                   "Abuse IP": {
+                        "malicioso": response['data']['abuseConfidenceScore'],
+                        "ip": response['data']['ipAddress'],
+                        "Dominio": response['data']['domain'],
+                        "País": response['data']['countryCode'],
+                        "Tipo": response['data']['usageType']
+                    }
+                } 

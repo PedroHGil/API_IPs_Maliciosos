@@ -1,14 +1,42 @@
 import requests
 import json
+from utils import credenciais
+from utils import urls
 
-def get_virus(virus):
-       
-    url = 'https://www.virustotal.com/api/v3/ip_addresses/{}'.format(virus.ip)
 
-    headers = {'X-Apikey':'55bd2bde973ef6420070bddfa8727eb2c4ed977bd6870492856f62cc6835578c'}
+class VirusTotal_API:
     
-    response = json.loads(requests.get(url, headers=headers).text)
     
-    return{
-           "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
-           }
+    def get_report_ip(ip):
+        
+        api_url = urls
+        api_key = credenciais
+        
+        url = api_url.URL.URL_VIRUS_TOTAL_IP.format(ip)
+
+        headers = {'X-Apikey': api_key.Credenciais.API_2}
+
+        response = json.loads(requests.get(url, headers=headers).text)
+
+        return{
+            "Virus Total": {
+                "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
+                }
+            }
+        
+    def get_report_url(url):
+        
+        api_url = urls
+        api_key = credenciais
+        
+        url = api_url.URL.URL_VIRUS_TOTAL_URL.format(url)
+
+        headers = {'X-Apikey': api_key.Credenciais.API_2}
+
+        response = json.loads(requests.get(url, headers=headers).text)
+
+        return{
+            "Virus Total": {
+                "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
+                }
+            }

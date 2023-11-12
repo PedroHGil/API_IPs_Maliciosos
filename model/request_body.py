@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class IP (BaseModel):
-    ip: str
+class Request (BaseModel):
+    scan: str
