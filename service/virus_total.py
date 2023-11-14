@@ -1,7 +1,7 @@
 import requests
 import json
-from utils import credenciais
-from utils import urls
+from service.utils import credenciais
+from service.utils import URLS
 
 
 class VirusTotal_API:
@@ -9,10 +9,10 @@ class VirusTotal_API:
     
     def get_report_ip(ip):
         
-        api_url = urls
+        api_url = URLS
         api_key = credenciais
         
-        url = api_url.URL.URL_VIRUS_TOTAL_IP.format(ip)
+        url = api_url.GetURL.URL_VIRUS_TOTAL_IP.format(ip)
 
         headers = {'X-Apikey': api_key.Credenciais.API_2}
 
@@ -26,10 +26,10 @@ class VirusTotal_API:
         
     def get_report_url(url):
         
-        api_url = urls
+        api_url = URLS
         api_key = credenciais
         
-        url = api_url.URL.URL_VIRUS_TOTAL_URL.format(url)
+        url = api_url.GetURL.URL_VIRUS_TOTAL_URL.format(url)
 
         headers = {'X-Apikey': api_key.Credenciais.API_2}
 

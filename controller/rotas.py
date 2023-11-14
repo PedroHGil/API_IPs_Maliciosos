@@ -1,33 +1,32 @@
 from fastapi import FastAPI
 import uvicorn
 from model import request_body
-from facade import facade
+from service.facade import facade
 
-app = FastAPI()
-
-#Services
-body = request_body
-
-@app.post('/v1/ip')
-def lambda_handler(ip_address: body.Request):
-    facade_service = facade.Facade(ip_address)
+class Inicar():
+    app = FastAPI()
     
-    response = facade_service.generate_report()
-    
-    return response
+    body = request_body
 
-@app.post('/v1/url')
-def lambda_handler(url: body.Request):
- 
-    facade_service = facade.Facade(url)
-    
-    response = facade_service.generate_report_url()
-    
-    return response
+    @app.post('/v1/ip')
+    def lambda_handler(ip_address: body.Request):
+        facade_service = facade.Facade(ip_address)
 
-@app.get('/v1/status')
-def status():
-    return {"mensagem": "OK"}
+        response = facade_service.generate_report()
+
+        return response
+
+    @app.post('/v1/url')
+    def lambda_handler(url: body.Request):
+        facade_service = facade.Facade(url)
+
+        response = facade_service.generate_report_url()
+
+        return response
+
+    @app.get('/v1/status')
+    def status():
+        return {"mensagem": "OK"}
 
 
-uvicorn.run(app, host='127.0.0.1', port=4443)
+    uvicorn.run(app, host='127.0.0.1', port=4443)

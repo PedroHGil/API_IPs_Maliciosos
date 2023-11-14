@@ -3,6 +3,8 @@ from service import virus_total
 from service import criminal_ip
 
 class Facade:
+
+    
     def __init__(self, request_body):
         self.scan = request_body.scan
         self.abuse_ip_service = abuse_ip.AbuseIP_API

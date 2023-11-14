@@ -1,22 +1,23 @@
 import requests
 import json
-from utils import credenciais
-from utils import urls
+from service.utils import credenciais
+from service.utils import URLS
 
-class CriminalIP_API:
-    def get_report(criminal):
+class CriminalIP_API:      
+    def get_report(ip):
         
-        api_url = urls
+        api_url = URLS
         api_key = credenciais
         
-        URL = api_url.URL.URL_CRIMINAL_IP
+        URL = api_url.GetURL.URL_CRIMINAL_IP
 
         headers = {
             "x-api-key": api_key.Credenciais.API_3
         }
-
+        
+        
         params = {
-            "ip": criminal,
+            "ip": ip,
             "full": False
         }
 
@@ -29,26 +30,34 @@ class CriminalIP_API:
             }
         }
         
-    def get_report_url(criminal):
         
-        api_url = urls
+    def get_report_url(criminal):
+         
+        api_url = URLS
         api_key = credenciais
         
-        URL = api_url.URL.URL_CRIMINAL_IP_URL
-
         headers = {
             "x-api-key": api_key.Credenciais.API_3
         }
-
+        
         params = {
             "query": criminal,
-            "offset": 1
+            "offset": 0
+            
         }
+        URL = api_url.GetURL.URL_CRIMINAL_IP_URL
 
         response = json.loads(requests.get(url=URL, params=params, headers=headers).content)
-        print(response)
+
         return{
             "Criminal IP": {
-                "data": response
+                "Score": response['data']['reports'][00]['score'],
+                "id": response['data']['reports'][00]['scan_id'],
+                "issues": response['data']['reports'][00]['issue']
             }
         }
+    
+    
+        
+
+        
