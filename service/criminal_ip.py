@@ -3,17 +3,20 @@ import json
 from service.utils import credenciais
 from service.utils import URLS
 
-class CriminalIP_API:      
-    def get_report(ip):
+class CriminalIP_API:   
+    
+    def __init__(self):
+        self.api_url = URLS
+        self.api_key = credenciais 
+           
+    def get_report(self, ip):
         
-        api_url = URLS
-        api_key = credenciais
-        
-        URL = api_url.GetURL.URL_CRIMINAL_IP
+        URL = self.api_url.GetURL.URL_CRIMINAL_IP
 
         headers = {
-            "x-api-key": api_key.Credenciais.API_3
+            "x-api-key": self.api_key.Credenciais.API_3
         }
+        print(type(headers))
         
         
         params = {
@@ -31,13 +34,11 @@ class CriminalIP_API:
         }
         
         
-    def get_report_url(criminal):
+    def get_report_url(self, criminal):
          
-        api_url = URLS
-        api_key = credenciais
         
         headers = {
-            "x-api-key": api_key.Credenciais.API_3
+            "x-api-key": self.api_key.Credenciais.API_3
         }
         
         params = {
@@ -45,7 +46,7 @@ class CriminalIP_API:
             "offset": 0
             
         }
-        URL = api_url.GetURL.URL_CRIMINAL_IP_URL
+        URL = self.api_url.GetURL.URL_CRIMINAL_IP_URL
 
         response = json.loads(requests.get(url=URL, params=params, headers=headers).content)
 

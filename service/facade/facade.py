@@ -7,9 +7,9 @@ class Facade:
     
     def __init__(self, request_body):
         self.scan = request_body.scan
-        self.abuse_ip_service = abuse_ip.AbuseIP_API
-        self.criminal_ip_service = criminal_ip.CriminalIP_API 
-        self.virus_total_service = virus_total.VirusTotal_API
+        self.abuse_ip_service = abuse_ip.AbuseIP_API()
+        self.criminal_ip_service = criminal_ip.CriminalIP_API()
+        self.virus_total_service = virus_total.VirusTotal_API()
 
     def generate_report(self):
         json = {}

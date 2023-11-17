@@ -7,14 +7,16 @@ from service.utils import URLS
 class VirusTotal_API:
     
     
-    def get_report_ip(ip):
+    def __init__(self):
+        self.api_url = URLS
+        self.api_key = credenciais 
+      
+    
+    def get_report_ip(self, ip):
         
-        api_url = URLS
-        api_key = credenciais
-        
-        url = api_url.GetURL.URL_VIRUS_TOTAL_IP.format(ip)
+        url = self.api_url.GetURL.URL_VIRUS_TOTAL_IP.format(ip)
 
-        headers = {'X-Apikey': api_key.Credenciais.API_2}
+        headers = {'X-Apikey': self.api_key.Credenciais.API_2}
 
         response = json.loads(requests.get(url, headers=headers).text)
 
@@ -24,14 +26,11 @@ class VirusTotal_API:
                 }
             }
         
-    def get_report_url(url):
+    def get_report_url(self, url):
         
-        api_url = URLS
-        api_key = credenciais
-        
-        url = api_url.GetURL.URL_VIRUS_TOTAL_URL.format(url)
+        url = self.api_url.GetURL.URL_VIRUS_TOTAL_URL.format(url)
 
-        headers = {'X-Apikey': api_key.Credenciais.API_2}
+        headers = {'X-Apikey': self.api_key.Credenciais.API_2}
 
         response = json.loads(requests.get(url, headers=headers).text)
 

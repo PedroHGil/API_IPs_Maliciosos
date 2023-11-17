@@ -4,17 +4,18 @@ from service.utils import credenciais
 from service.utils import URLS
 
 class AbuseIP_API:
+      
+    def __init__(self):
+        self.api_url = URLS
+        self.api_key = credenciais 
     
-    def get_report(body):   
+    def get_report(self, body):   
         
-        api_url = URLS
-        api_key = credenciais
-        
-        url = api_url.GetURL.URL_ABUSE_IP
+        url = self.api_url.GetURL.URL_ABUSE_IP
 
         headers = {
              'Accept': 'application/json',
-             'Key': api_key.Credenciais.API_1
+             'Key': self.api_key.Credenciais.API_1
          }
         
         querystring = {

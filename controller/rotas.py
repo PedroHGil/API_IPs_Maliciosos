@@ -4,12 +4,11 @@ from model import request_body
 from service.facade import facade
 
 class Inicar():
-    app = FastAPI()
     
-    body = request_body
+    app = FastAPI()
 
     @app.post('/v1/ip')
-    def lambda_handler(ip_address: body.Request):
+    def rota_ip(ip_address: request_body.Request):
         facade_service = facade.Facade(ip_address)
 
         response = facade_service.generate_report()
@@ -17,7 +16,7 @@ class Inicar():
         return response
 
     @app.post('/v1/url')
-    def lambda_handler(url: body.Request):
+    def rota_url(url:  request_body.Request):
         facade_service = facade.Facade(url)
 
         response = facade_service.generate_report_url()
