@@ -16,8 +16,6 @@ class CriminalIP_API:
         headers = {
             "x-api-key": self.api_key.Credenciais.API_3
         }
-        print(type(headers))
-        
         
         params = {
             "ip": ip,
