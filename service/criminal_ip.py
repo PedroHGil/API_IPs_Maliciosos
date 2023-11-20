@@ -52,9 +52,9 @@ class CriminalIP_API:
 
         return{
             "Criminal IP": {
-                "Score": response['data']['reports'][00]['score'],
-                "id": response['data']['reports'][00]['scan_id'],
-                "issues": response['data']['reports'][00]['issue']
+                "Score": response['data']['reports'][00]['score'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
+                "id": response['data']['reports'][00]['scan_id'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
+                "issues": response['data']['reports'][00]['issue'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL"
             }
         }
     
