@@ -23,13 +23,19 @@ class CriminalIP_API:
         }
 
         response = json.loads(requests.get(url=URL, params=params, headers=headers).content)
-
-        return{
-            "Criminal IP": {
-                "whois": response['whois'],
-                "vulnerability": response['vulnerability']
+        try:
+            return{
+                "Criminal IP": {
+                    "whois": response['whois'],
+                    "vulnerability": response['vulnerability']
+                }
             }
-        }
+        except:
+            return{
+                "Criminal IP": {
+                    "msg": "Sem dados relacionado a essa URL"
+                }
+            }
         
         
     def get_report_url(self, criminal):
@@ -47,15 +53,23 @@ class CriminalIP_API:
         URL = self.api_url.GetURL.URL_CRIMINAL_IP_URL
 
         response = json.loads(requests.get(url=URL, params=params, headers=headers).content)
-
-        return{
-            "Criminal IP": {
-                "Score": response['data']['reports'][00]['score'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
-                "id": response['data']['reports'][00]['scan_id'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
-                "issues": response['data']['reports'][00]['issue'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL"
+        
+        try:
+            return{
+                "Criminal IP": {
+                    "Score": response['data']['reports'][00]['score'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
+                    "id": response['data']['reports'][00]['scan_id'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
+                    "issues": response['data']['reports'][00]['issue'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL"
+                }
             }
-        }
-    
+            
+        except:
+             return{
+                "Criminal IP": {
+                    "msg": "Sem dados relacionado a essa URL"
+                }
+            }
+            
     
         
 

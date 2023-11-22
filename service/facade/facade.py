@@ -13,32 +13,29 @@ class Facade:
         self.virus_total_service = virus_total.VirusTotal_API()
         self.validacoes = valida_entrada.ValidaEntrada()
 
-    def generate_report(self):
+    def generate_report(self, tipo):
         json = {}
         try:
     
-            self.validacoes.validacoes(self.scan, 0)
+            if tipo == 0:
+                
+                self.validacoes.validacao_ip(self.scan)
+                
+                json.update(self.abuse_ip_service.get_report(self.scan))
+                json.update(self.virus_total_service.get_report_ip(self.scan))
+                json.update(self.criminal_ip_service.get_report(self.scan))
+                
+            elif tipo == 1:
+                
+                self.validacoes.validacao_url(self.scan)
             
-            json.update(self.abuse_ip_service.get_report(self.scan))
-            json.update(self.virus_total_service.get_report_ip(self.scan))
-            json.update(self.criminal_ip_service.get_report(self.scan))
+                json.update(self.virus_total_service.get_report_url(self.scan))
+                json.update(self.criminal_ip_service.get_report_url(self.scan))
+                
             
         except Exception as e:
             json.update({"Error": str(e)})
             
         return json
     
-    def generate_report_url(self):
-        json = {}
-        try:
-    
-            self.validacoes.validacoes(self.scan, 1)
-            
-            json.update(self.virus_total_service.get_report_url(self.scan))
-            json.update(self.criminal_ip_service.get_report_url(self.scan))
-            
-        except Exception as e:
-            json.update({"Error": str(e)})
-            
-        return json
         

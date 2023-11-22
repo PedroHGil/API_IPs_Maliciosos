@@ -25,12 +25,20 @@ class AbuseIP_API:
         
         response = json.loads(requests.get(url=url, headers=headers, params=querystring).text)
         
-        return {
-                   "Abuse IP": {
-                        "malicioso": response['data']['abuseConfidenceScore'],
-                        "ip": response['data']['ipAddress'],
-                        "Dominio": response['data']['domain'],
-                        "País": response['data']['countryCode'],
-                        "Tipo": response['data']['usageType']
-                    }
-                } 
+        try:
+            
+            return {
+                       "Abuse IP": {
+                            "malicioso": response['data']['abuseConfidenceScore'],
+                            "ip": response['data']['ipAddress'],
+                            "Dominio": response['data']['domain'],
+                            "País": response['data']['countryCode'],
+                            "Tipo": response['data']['usageType']
+                        }
+                    } 
+        except:
+             return{
+                "Abuse IP": {
+                    "msg": "Sem dados relacionado a esse IP"
+                }
+            }

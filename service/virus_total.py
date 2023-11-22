@@ -20,9 +20,17 @@ class VirusTotal_API:
 
         response = json.loads(requests.get(url, headers=headers).text)
 
-        return{
-            "Virus Total": {
-                "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
+        try:
+            
+            return{
+                "Virus Total": {
+                    "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
+                    }
+                }
+        except:
+             return{
+                "Virus Total": {
+                    "msg": "Sem dados relacionado a esse IP"
                 }
             }
         
@@ -34,8 +42,15 @@ class VirusTotal_API:
 
         response = json.loads(requests.get(url, headers=headers).text)
 
-        return{
-            "Virus Total": {
-                "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
+        try:
+            return{
+                "Virus Total": {
+                    "Reports por anti-virus": response['data']['attributes']['last_analysis_stats']
+                    }
+                }
+        except:
+             return{
+                "Virus Total": {
+                    "msg": "Sem dados relacionado a essa URL"
                 }
             }

@@ -11,7 +11,7 @@ class Inicar():
     def rota_ip(ip_address: request_body.Request):
         facade_service = facade.Facade(ip_address)
 
-        response = facade_service.generate_report()
+        response = facade_service.generate_report(tipo=0)
 
         return response
 
@@ -19,7 +19,7 @@ class Inicar():
     def rota_url(url:  request_body.Request):
         facade_service = facade.Facade(url)
 
-        response = facade_service.generate_report_url()
+        response = facade_service.generate_report(tipo=1)
 
         return response
 
