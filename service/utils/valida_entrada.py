@@ -23,6 +23,4 @@ class ValidaEntrada():
         if re.search('[a-zA-Z]', entrada):
             raise Exception("IP nao pode conter letras")
         
-        if re.search('[.]{3}', entrada):
-            raise Exception("IP deve ser valido ! Ex 0.0.0.0")
             
