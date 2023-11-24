@@ -26,14 +26,14 @@ class AbuseIP_API:
         response = json.loads(requests.get(url=url, headers=headers, params=querystring).text)
         
         try:
-            
+                      
             return {
                        "Abuse IP": {
-                            "malicioso": response['data']['abuseConfidenceScore'],
-                            "ip": response['data']['ipAddress'],
-                            "Dominio": response['data']['domain'],
-                            "País": response['data']['countryCode'],
-                            "Tipo": response['data']['usageType']
+                            "malicioso": response['data']['abuseConfidenceScore'] if response['data'].get('abuseConfidenceScore') else "Sem dados relacionado a esse IP",
+                            "ip": response['data']['ipAddress']                   if response['data'].get('ipAddress') else "Sem dados relacionado a esse IP",
+                            "Dominio": response['data']['domain']                 if response['data'].get('domain') else "Sem dados relacionado a esse IP",
+                            "País": response['data']['countryCode']               if response['data'].get('countryCode') else "Sem dados relacionado a esse IP",
+                            "Tipo": response['data']['usageType']                 if response['data'].get('usageType') else "Sem dados relacionado a esse IP"
                         }
                     } 
         except:

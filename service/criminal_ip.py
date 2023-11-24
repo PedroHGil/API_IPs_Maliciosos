@@ -26,8 +26,8 @@ class CriminalIP_API:
         try:
             return{
                 "Criminal IP": {
-                    "whois": response['whois'],
-                    "vulnerability": response['vulnerability']
+                    "whois": response['whois']                  if response.get('whois') else "Sem dados relacionado a essa URL",
+                    "vulnerability": response['vulnerability']  if response.get('vulnerability') else "Sem dados relacionado a essa URL",
                 }
             }
         except:
@@ -57,9 +57,9 @@ class CriminalIP_API:
         try:
             return{
                 "Criminal IP": {
-                    "Score": response['data']['reports'][00]['score'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
-                    "id": response['data']['reports'][00]['scan_id'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL",
-                    "Problemas": response['data']['reports'][00]['issue'] if len(response['data']['reports']) > 1 else "Sem dados realcionado a essa URL"
+                    "Score": response['data']['reports'][00]['score']       if response['data'].get('reports') else "Sem dados realcionado a essa URL",
+                    "id": response['data']['reports'][00]['scan_id']        if response['data'].get('reports') else "Sem dados realcionado a essa URL",
+                    "Problemas": response['data']['reports'][00]['issue']   if response['data'].get('reports') else "Sem dados realcionado a essa URL"
                 }
             }
             
